@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 abstract class Base
 {
-    public function __construct(object $body) {
+    public function __construct(array|object $body) {
         foreach ($body as $prop => $value) {
             $prop = Str::camel($prop);
             $this->preTransform($prop, $value);
