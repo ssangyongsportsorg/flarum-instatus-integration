@@ -2,6 +2,6 @@
 
 use Flarum\Database\Migration;
 
-return Migration::addColumns('discussions', [
+return Migration::addColumns('posts', [
     'instatus_id' => ['text']
 ]);
