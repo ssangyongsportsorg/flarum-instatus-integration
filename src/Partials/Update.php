@@ -11,8 +11,8 @@ use Maicol07\Instatus\Base;
  * @method string body()
  * @method string markdown()
  * @method string status()
- * @method Carbon created_at()
- * @method Carbon updated_at()
+ * @method Carbon createdAt()
+ * @method Carbon updatedAt()
  */
 class Update extends Base
 {

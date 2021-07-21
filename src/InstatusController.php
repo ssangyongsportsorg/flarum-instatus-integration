@@ -41,7 +41,7 @@ class InstatusController implements RequestHandlerInterface
             $update = $incident->updates()->pull(0);
             assert($update instanceof Update);
 
-            $footer = $instatus->isMaintenance ? "This maintenance should last {$update->duration()} minutes" : "This issue is categorized as {$incident->impact()}";
+            $footer = $instatus->isMaintenance ? "This maintenance should last {$incident->duration()} minutes" : "This issue is categorized as {$incident->impact()}";
 
             $discussion = $this->bus->dispatch(
                 new StartDiscussion($actor, [
@@ -50,9 +50,9 @@ class InstatusController implements RequestHandlerInterface
                         'title' => $incident->name(),
                         'content' => "{$update->body()}
 
-Created on {$update->created_at()->formatLocalized('%A %d %B %Y')}
+Created on {$update->createdAt()->formatLocalized('%A %d %B %Y')}
 
-Last edited on {$update->updated_at()->formatLocalized('%A %d %B %Y')}
+Last edited on {$update->updatedAt()->formatLocalized('%A %d %B %Y')}
 
 $footer
 
@@ -63,8 +63,10 @@ $footer
                     'relationships' => [
                         'tags' => [
                             'data' => [
-                                'type' => 'tags',
-                                'id' => 3
+                                [
+                                    'type' => 'tags',
+                                    'id' => 3
+                                ]
                             ]
                         ]
                     ]
@@ -87,8 +89,8 @@ $footer
                             
                             {$update->body()}
 
-                            Created on {$update->created_at()->formatLocalized('%A %d %B %Y')}
-                            Last edited on {$update->updated_at()->formatLocalized('%A %d %B %Y')}
+                            Created on {$update->createdAt()->formatLocalized('%A %d %B %Y')}
+                            Last edited on {$update->updatedAt()->formatLocalized('%A %d %B %Y')}
 
                             <b>Affected systems: {$incident->affectedComponents()->pluck('name')->join(', ')}</b>"
                             ]
