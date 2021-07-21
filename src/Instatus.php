@@ -15,7 +15,7 @@ class Instatus extends Base
 {
     public bool $isMaintenance = false;
 
-    public function __construct(array|object $body)
+    public function __construct(object $body)
     {
         if (isset($body->maintenance)) {
             $this->isMaintenance = true;
