@@ -2,7 +2,6 @@
 
 namespace Maicol07\Instatus;
 
-use Flarum\Api\Client;
 use Flarum\Bus\Dispatcher;
 use Flarum\Discussion\Command\ReadDiscussion;
 use Flarum\Discussion\Command\StartDiscussion;
@@ -10,7 +9,6 @@ use Flarum\Discussion\Discussion;
 use Flarum\Post\Command\PostReply;
 use Flarum\Post\Post;
 use Flarum\User\User;
-use Illuminate\Support\Arr;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Maicol07\Instatus\Partials\Update;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -23,7 +21,7 @@ class InstatusController implements RequestHandlerInterface
 
     public function __construct(Dispatcher $bus)
     {
-        $this->api = $bus;
+        $this->bus = $bus;
     }
 
     public function handle(Request $request): Response

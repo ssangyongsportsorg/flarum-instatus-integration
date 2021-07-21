@@ -14,6 +14,6 @@ namespace Maicol07\Instatus;
 use Flarum\Extend;
 
 return [
-    (new Extend\Routes('forum'))
-        ->post('/integrations/instatus', 'integrations.instatus', InstatusController::class)
+    (new Extend\Routes('api'))
+        ->post('/instatus', 'integrations.instatus', InstatusController::class)
 ];
