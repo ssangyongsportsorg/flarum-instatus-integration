@@ -4,15 +4,16 @@ namespace Maicol07\Instatus;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use stdClass;
 
 abstract class Base
 {
-    public function __construct(object $body) {
+    public function __construct(stdClass $body) {
         foreach ($body as $prop => $value) {
             $prop = Str::camel($prop);
             $this->preTransform($prop, $value);
 
-            if (is_object($value)) {
+            if ($value instanceof stdClass) {
                 $partial = 'Maicol07\Instatus\Partials\\' . Str::studly($prop);
                 $value = new $partial($value);
             }
@@ -26,7 +27,7 @@ abstract class Base
                 $value = $collection;
             }
 
-            if (preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})Z$/', $value)) {
+            if (is_string($value) && preg_match('/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})Z$/', $value)) {
                 $value = Carbon::parse($value);
             }
             $this->postTransform($prop, $value);
@@ -53,6 +54,6 @@ abstract class Base
 
     public function __call(string $name, array $arguments=null): mixed
     {
-        return $this?->$name;
+        return property_exists($this, $name) ? $this->$name : null;
     }
 }
