@@ -9,6 +9,7 @@ use Flarum\Discussion\Discussion;
 use Flarum\Post\Command\PostReply;
 use Flarum\Post\Post;
 use Flarum\User\User;
+use JsonException;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Maicol07\Instatus\Partials\Update;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -24,9 +25,12 @@ class InstatusController implements RequestHandlerInterface
         $this->bus = $bus;
     }
 
+    /**
+     * @throws JsonException
+     */
     public function handle(Request $request): Response
     {
-        $body = $request->getParsedBody();
+        $body = json_decode($request->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
         $instatus = new Instatus($body);
         $incident = $instatus->incident();
         $ipAddress = $request->getAttribute('ipAddress');
