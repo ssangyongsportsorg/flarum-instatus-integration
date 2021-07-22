@@ -96,7 +96,7 @@ Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$u
                     if ($matches[0] !== $incident->status()) {
                         return $incident->status();
                     }
-                    return $matches[0];
+                    return "[$matches[0]]";
                 }, $discussion->title);
                 $discussion->save();
             }
