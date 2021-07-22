@@ -81,16 +81,14 @@ Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$u
             if (!Post::where('instatus_id', $update->id())->exists()) {
                 $this->bus->dispatch(
                     new PostReply($discussion->id, $actor, [
-                        'data' => [
-                            'attributes' => [
-                                'content' => "Current status: {$update->status()}
-                            
-                            {$update->markdown()}
+                        'attributes' => [
+                            'content' => "Current status: {$update->status()}
+                        
+                        {$update->markdown()}
 
-                            **Affected systems: {$incident->affectedComponents()->pluck('name')->join(', ')}**
-                            
-                            Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$update->updatedAt()->formatLocalized('%c')}`"
-                            ]
+                        **Affected systems: {$incident->affectedComponents()->pluck('name')->join(', ')}**
+                        
+                        Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$update->updatedAt()->formatLocalized('%c')}`"
                         ]
                     ], $ipAddress)
                 );
