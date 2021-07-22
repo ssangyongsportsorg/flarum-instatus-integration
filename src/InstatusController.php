@@ -94,7 +94,7 @@ Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$u
                 );
                 $discussion->title = preg_replace_callback('/\[([A-Z])\w+]/', static function ($matches) use ($incident) {
                     if ($matches[0] !== $incident->status()) {
-                        return $incident->status();
+                        return "[{$incident->status()}]";
                     }
                     return "[$matches[0]]";
                 }, $discussion->title);
