@@ -82,7 +82,7 @@ Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$u
                 $this->bus->dispatch(
                     new PostReply($discussion->id, $actor, [
                         'attributes' => [
-                            'content' => "Current status: {$update->status()}
+                            'content' => "Current status: **{$update->status()}**
 
 {$update->markdown()}
 
