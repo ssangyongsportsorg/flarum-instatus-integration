@@ -83,12 +83,12 @@ Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$u
                     new PostReply($discussion->id, $actor, [
                         'attributes' => [
                             'content' => "Current status: {$update->status()}
-                        
-                        {$update->markdown()}
 
-                        **Affected systems: {$incident->affectedComponents()->pluck('name')->join(', ')}**
-                        
-                        Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$update->updatedAt()->formatLocalized('%c')}`"
+{$update->markdown()}
+
+**Affected systems: {$incident->affectedComponents()->pluck('name')->join(', ')}**
+
+Created on `{$update->createdAt()->formatLocalized('%c')}` - Last edited on `{$update->updatedAt()->formatLocalized('%c')}`"
                         ]
                     ], $ipAddress)
                 );
