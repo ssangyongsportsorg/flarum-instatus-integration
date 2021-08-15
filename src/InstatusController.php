@@ -37,6 +37,11 @@ class InstatusController implements RequestHandlerInterface
         $actor = User::find(2);
 
         if (!Discussion::where('instatus_id', $incident->id())->exists()) {
+            if ($incident->status() === 'RESOLVED') {
+                return new JsonResponse([
+                    'status' => '204'
+                ], 204);
+            }
             // Create discussion
             $update = $incident->updates()->pull(0);
             assert($update instanceof Update);
