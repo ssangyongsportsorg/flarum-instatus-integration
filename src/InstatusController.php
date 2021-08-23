@@ -32,6 +32,11 @@ class InstatusController implements RequestHandlerInterface
     {
         $body = json_decode($request->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
         $instatus = new Instatus($body);
+        if ($instatus->component_update() !== null) {
+            return new JsonResponse([
+                'status' => '204'
+            ], 204);
+        }
         $incident = $instatus->incident();
         $ipAddress = $request->getAttribute('ipAddress');
         $actor = User::find(2);

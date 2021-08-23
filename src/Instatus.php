@@ -3,13 +3,17 @@
 namespace Maicol07\Instatus;
 
 use Flarum\Frontend\Content\Meta;
+use Maicol07\Instatus\Partials\Component;
+use Maicol07\Instatus\Partials\ComponentUpdate;
 use Maicol07\Instatus\Partials\Incident;
 use Maicol07\Instatus\Partials\Page;
 
 /**
  * @method Meta meta()
  * @method Page page()
- * @method Incident incident()
+ * @method Incident incident() Available only if it's an incident or maintenance
+ * @method Component component() Available only if it's a component update (like automated status updates)
+ * @method ComponentUpdate component_update() Available only f it's a component update (like automated status updates)
  */
 class Instatus extends Base
 {
