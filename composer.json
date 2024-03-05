@@ -1,5 +1,5 @@
 {
-  "name": "maicol07/flarum-instatus-integration",
+  "name": "ssport/flarum-instatus-integration",
   "description": "Instatus integration for Flarum",
   "keywords": [
     "flarum"
@@ -16,7 +16,7 @@
   },
   "authors": [
     {
-      "name": "maicol07",
+      "name": "ssport",
       "email": "maicolbattistini@live.it",
       "role": "Developer"
     }
